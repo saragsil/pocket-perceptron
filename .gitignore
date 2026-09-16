@@ -1,0 +1,25 @@
+# Το PDF της εκφώνησης ΔΕΝ ανεβαίνει: είναι υλικό του μαθήματος, όχι δική μου δουλειά.
+ΕΡΓΑΣΙΑ-ΕΡΓΑΣΤΗΡΙΟΥ-ΥΠΟΛΟΓΙΣΤΙΚΗΣ-ΝΟΗΜΟΣΥΝΗΣ*.pdf
+
+# Επεξεργάσιμη πηγή της αναφοράς (στο repo μπαίνει μόνο το PDF στο docs/)
+*.docx
+
+# Το αντίγραφο της αναφοράς στη ρίζα (η εκδοχή που ανεβαίνει είναι το docs/)
+/POCKET PERCEPTRON.pdf
+
+# MATLAB / Octave
+*.asv
+*.mex*
+octave-workspace
+slprj/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python (tools/)
+__pycache__/
+*.pyc
+.venv/
