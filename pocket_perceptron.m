@@ -31,6 +31,10 @@ function [best_weights, best_correct] = pocket_perceptron(input, learning_rate, 
     if nargin < 3 || isempty(max_epochs),    max_epochs    = 1000; end
     if nargin < 4 || isempty(do_plot),       do_plot       = true; end
 
+    if max_epochs < 1
+        error('pocket_perceptron:badEpochs', 'Το max_epochs πρέπει να είναι >= 1.');
+    end
+
     % ---- Δεδομένα εισόδου -------------------------------------------------
     if size(input, 2) ~= 3
         error('pocket_perceptron:badInput', ...
@@ -116,13 +120,17 @@ function [best_weights, best_correct] = pocket_perceptron(input, learning_rate, 
         fade_and_draw(current_line, [], x_lim, y_lim);
         final_line = plot_boundary(best_weights, x_lim, y_lim, 'r-', 'LineWidth', 2);
 
-        handles = [class_minus, class_plus];
-        labels  = {'Class -1', 'Class +1'};
-        if ~isempty(final_line)
-            handles(end + 1) = final_line;
-            labels{end + 1}  = 'Pocket decision boundary';
+        % Τα handles μπαίνουν στη legend με μία ενιαία συνένωση: η ανάθεση
+        % handles(end+1) θα μεγάλωνε έναν πίνακα Scatter με ένα Line.
+        if isempty(final_line)
+            legend([class_minus, class_plus], ...
+                   {'Class -1', 'Class +1'}, ...
+                   'Location', 'best');
+        else
+            legend([class_minus, class_plus, final_line], ...
+                   {'Class -1', 'Class +1', 'Pocket decision boundary'}, ...
+                   'Location', 'best');
         end
-        legend(handles, labels, 'Location', 'best');
     end
 
     % ---- Αποτελέσματα -----------------------------------------------------
